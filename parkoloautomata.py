@@ -16,3 +16,11 @@ class OradijasJegy(ParkoloJegy):
         percek = masodpercek / 60
         orak = ceil(percek / 60)
         ar = 500 + (orak - 1) * 300
+        if ar > 2500:
+            ar = 2500
+        return ar
+
+class NapiJegy(ParkoloJegy):
+
+    def ar_szamitasa(self):
+        return 2500
