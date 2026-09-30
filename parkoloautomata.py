@@ -12,6 +12,7 @@ class OradijasJegy(ParkoloJegy):
 
     def ar_szamitasa(self):
         eltelt_ido = self.kilepes_ido - self.belepes_ido
-        masodpercek = eltelt_ido.total_masodpercek()
+        masodpercek = eltelt_ido.total_seconds()
         percek = masodpercek / 60
-        orak = percek / 60
+        orak = ceil(percek / 60)
+        ar = 500 + (orak - 1) * 300
