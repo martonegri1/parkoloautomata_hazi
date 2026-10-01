@@ -24,3 +24,10 @@ class NapiJegy(ParkoloJegy):
 
     def ar_szamitasa(self):
         return 2500
+
+belepes = datetime(2026, 9, 30, 10, 0)
+kilepes = datetime(2026, 9, 30, 11, 15)
+
+jegy1 = OradijasJegy("parkolo1", "abc456",belepes, kilepes)
+print(jegy1.ar_szamitasa())
+
