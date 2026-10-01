@@ -35,14 +35,20 @@ def oradijas_jegy_bekerese():
 
     jegy = OradijasJegy(hely, rendszam, belepes, kilepes)
 
-    print("Rögzítés sikeres!")
-    print("Jegy típusa: Óradíjas jegy")
-    print(f"Parkolóhely száma: {jegy.hely}")
-    print(f"Rendszám: {jegy.rendszam}")
-    print(f"Belepes: {jegy.belepes_ido}")
-    print(f"Kilepes: {jegy.kilepes_ido}")
-    print(f"Fizetendő összeg: {jegy.ar_szamitasa()} Ft")
     return jegy
+
+def napidijas_jegy_bekerese():
+    print("\n- - - Napijegy vásárlása - - -")
+    print("------------------------------")
+    hely = int(input("Add meg a parkolóhely számát: "))
+    rendszam = input("Add meg a rendszámot (BBB-NNN): ")
+    belepes = datetime.strptime(input("Add meg a belépési időpontot (ÉÉÉÉ-HH-NN ÓÓ:PP): "), "%Y-%m-%d %H:%M")
+    kilepes = datetime.strptime(input("Add meg a kilépési időpontot (ÉÉÉÉ-HH-NN ÓÓ:PP:): "), "%Y-%m-%d %H:%M")
+
+    jegy = NapiJegy(hely, rendszam, belepes, kilepes)
+
+    return jegy
+
 
 
 
@@ -59,9 +65,23 @@ def main():
 
         if jegy_tipus == "1":
             jegy = oradijas_jegy_bekerese()
+            print("\nRögzítés sikeres!")
+            print("\nJegy típusa: Óradíjas jegy")
+            print(f"Parkolóhely száma: {jegy.hely}")
+            print(f"Rendszám: {jegy.rendszam}")
+            print(f"Belepes: {jegy.belepes_ido}")
+            print(f"Kilepes: {jegy.kilepes_ido}")
+            print(f"\nFizetendő összeg: {jegy.ar_szamitasa()} Ft")
 
         elif jegy_tipus == "2":
-            NapiJegy.ar_szamitasa()
+            jegy = napidijas_jegy_bekerese()
+            print("\nRögzítés sikeres!")
+            print("\nJegy típusa: Napijegy")
+            print(f"Parkolóhely száma: {jegy.hely}")
+            print(f"Rendszám: {jegy.rendszam}")
+            print(f"Belepes: {jegy.belepes_ido}")
+            print(f"Kilepes: {jegy.kilepes_ido}")
+            print(f"\nFizetendő összeg: {jegy.ar_szamitasa()} Ft")
 
         elif jegy_tipus == "0":
             print("Kilépés...")
