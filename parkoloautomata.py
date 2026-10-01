@@ -25,9 +25,45 @@ class NapiJegy(ParkoloJegy):
     def ar_szamitasa(self):
         return 2500
 
-belepes = datetime(2026, 9, 30, 10, 0)
-kilepes = datetime(2026, 9, 30, 11, 15)
+def oradijas_jegy_bekerese():
+    print("\n- - - Óradíjas jegy vásárlása - - -")
+    print("-----------------------------------")
+    hely = int(input("Add meg a parkolóhely számát: "))
+    rendszam = input("Add meg a rendszámot (BBB-NNN): ")
+    belepes = datetime.strptime(input("Add meg a belépési időpontot (ÉÉÉÉ-HH-NN ÓÓ:PP): "), "%Y-%m-%d %H:%M")
+    kilepes = datetime.strptime(input("Add meg a kilépési időpontot (ÉÉÉÉ-HH-NN ÓÓ:PP:): "), "%Y-%m-%d %H:%M")
 
-jegy1 = OradijasJegy("parkolo1", "abc456",belepes, kilepes)
-print(jegy1.ar_szamitasa())
+    jegy = OradijasJegy(hely, rendszam, belepes, kilepes)
 
+    print("Rögzítés sikeres!")
+    print("Jegy típusa: Óradíjas jegy")
+    print(f"Parkolóhely száma: {jegy.hely}")
+    print(f"Rendszám: {jegy.rendszam}")
+    print(f"Belepes: {jegy.belepes_ido}")
+    print(f"Kilepes: {jegy.kilepes_ido}")
+    print(f"Fizetendő összeg: {jegy.ar_szamitasa()} Ft")
+    return jegy
+
+
+
+def main():
+    while True:
+        print("\n- - - PARKOLÁS KEZELŐ - - -")
+        print("---------------------------")
+        print()
+        print("1 - Óradíjas jegy vásárlása")
+        print("2 - Napijegy vásárlása")
+        print("0 - Kilépés")
+
+        jegy_tipus = input("\nVálassz: ")
+
+        if jegy_tipus == "1":
+            jegy = oradijas_jegy_bekerese()
+
+        elif jegy_tipus == "2":
+            NapiJegy.ar_szamitasa()
+
+        elif jegy_tipus == "0":
+            print("Kilépés...")
+            break
+main()
