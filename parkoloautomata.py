@@ -1,5 +1,8 @@
 from datetime import datetime
 from math import ceil
+from colorama import Fore, Style, init
+
+init()
 
 class ParkoloJegy:
     def __init__(self, hely, rendszam, belepes_ido, kilepes_ido):
@@ -49,6 +52,25 @@ def napidijas_jegy_bekerese():
 
     return jegy
 
+def formazas(fuggveny):
+    def belso_fuggveny(*args, **kwargs):
+        print(Fore.GREEN + "=" * 40 + Style.RESET_ALL)
+        fuggveny(*args, **kwargs)
+        print(Fore.GREEN + "=" * 40 + Style.RESET_ALL)
+    return belso_fuggveny
+
+@formazas
+def rogzites(jegy):
+    print("Rögzítés sikeres!")
+    if isinstance(jegy, OradijasJegy):
+        print("\nJegy típusa: Óradíjas jegy")
+    elif isinstance(jegy, NapiJegy):
+        print("\nJegy típusa: Napijegy")
+    print(f"Parkolóhely száma: {jegy.hely}")
+    print(f"Rendszám: {jegy.rendszam}")
+    print(f"Belepes: {jegy.belepes_ido}")
+    print(f"Kilepes: {jegy.kilepes_ido}")
+    print(f"\nFizetendő összeg: {jegy.ar_szamitasa()} Ft")
 
 
 
@@ -65,23 +87,11 @@ def main():
 
         if jegy_tipus == "1":
             jegy = oradijas_jegy_bekerese()
-            print("\nRögzítés sikeres!")
-            print("\nJegy típusa: Óradíjas jegy")
-            print(f"Parkolóhely száma: {jegy.hely}")
-            print(f"Rendszám: {jegy.rendszam}")
-            print(f"Belepes: {jegy.belepes_ido}")
-            print(f"Kilepes: {jegy.kilepes_ido}")
-            print(f"\nFizetendő összeg: {jegy.ar_szamitasa()} Ft")
+            rogzites(jegy)
 
         elif jegy_tipus == "2":
             jegy = napidijas_jegy_bekerese()
-            print("\nRögzítés sikeres!")
-            print("\nJegy típusa: Napijegy")
-            print(f"Parkolóhely száma: {jegy.hely}")
-            print(f"Rendszám: {jegy.rendszam}")
-            print(f"Belepes: {jegy.belepes_ido}")
-            print(f"Kilepes: {jegy.kilepes_ido}")
-            print(f"\nFizetendő összeg: {jegy.ar_szamitasa()} Ft")
+            rogzites(jegy)
 
         elif jegy_tipus == "0":
             print("Kilépés...")
