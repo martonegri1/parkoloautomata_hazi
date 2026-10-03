@@ -1,6 +1,7 @@
 import unittest
 from datetime import datetime
 from parkoloautomata import OradijasJegy, NapiJegy
+from unittest.mock import patch
 
 class TestOradijasJegy(unittest.TestCase):
     def test_jegy(self):
@@ -59,4 +60,20 @@ class TestNapiJegy(unittest.TestCase):
         jegy = NapiJegy(1, "ABC-123", belepes, kilepes)
         self.assertEqual(jegy.ar_szamitasa(), 2500)
 
+    def test_ket_nap(self):
+        belepes = datetime(2026, 9, 30, 10, 0)
+        kilepes = datetime(2026, 10, 2, 10, 0)
+        jegy = NapiJegy(1, "ABC-123", belepes, kilepes)
+        self.assertEqual(jegy.ar_szamitasa(), 2500)
 
+    def test_parkolohely(self):
+        belepes = datetime(2026, 9, 30, 10, 0)
+        kilepes = datetime(2026, 10, 2, 10, 0)
+        jegy = NapiJegy(25, "ABC-123", belepes, kilepes)
+        self.assertEqual(jegy.hely, 25)
+
+    def test_rendszam(self):
+        belepes = datetime(2026, 9, 30, 10, 0)
+        kilepes = datetime(2026, 10, 2, 10, 0)
+        jegy = NapiJegy(25, "ABC-123", belepes, kilepes)
+        self.assertEqual(jegy.rendszam, "ABC-123")
