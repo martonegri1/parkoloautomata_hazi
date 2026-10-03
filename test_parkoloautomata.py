@@ -8,3 +8,15 @@ class TestOradijasJegy(unittest.TestCase):
         kilepes = datetime(2026, 9, 30, 11,0)
         jegy = OradijasJegy(1, "ABC-123", belepes, kilepes)
         self.assertEqual(jegy.ar_szamitasa(),500)
+
+    def test_egy_perc(self):
+        belepes = datetime(2026, 9, 30, 10,0)
+        kilepes = datetime(2026, 9, 30, 10,1)
+        jegy = OradijasJegy(1, "ABC-123", belepes, kilepes)
+        self.assertEqual(jegy.ar_szamitasa(),500)
+
+    def test_nyolc_es_fel_ora(self):
+        belepes = datetime(2026, 9, 30, 10,0)
+        kilepes = datetime(2026, 9, 30, 18,30)
+        jegy = OradijasJegy(1, "ABC-123", belepes, kilepes)
+        self.assertEqual(jegy.ar_szamitasa(),2500)
