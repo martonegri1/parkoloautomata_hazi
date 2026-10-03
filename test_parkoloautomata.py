@@ -1,8 +1,8 @@
 import unittest
 from datetime import datetime
+import parkoloautomata
 
-from Modul_23.parkoloautomata_hazi.parkoloautomata import oradijas_jegy_bekerese, napidijas_jegy_bekerese
-from parkoloautomata import OradijasJegy, NapiJegy
+# from parkoloautomata import OradijasJegy, NapiJegy
 from unittest.mock import patch
 
 class TestOradijasJegy(unittest.TestCase):
